@@ -43,6 +43,9 @@ def extract_job_from_result(driver):
 
         # add to df
         jobs.loc[len(jobs.index)]=[jobTitle, jobCompany, jobLocation, jobSalary, jobDescription]
-    return jobs
 
-print(extract_job_from_result(driver))
+    # write to xl
+    jobs.to_excel("indeed.xlsx", index=False, sheet_name='sheet1')
+
+extract_job_from_result(driver)
+
