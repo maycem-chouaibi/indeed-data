@@ -48,4 +48,3 @@ def extract_job_from_result(driver):
     jobs.to_excel("indeed.xlsx", index=False, sheet_name='sheet1')
 
 extract_job_from_result(driver)
-
