@@ -6,7 +6,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 # Create a new instance of the chrome driver. Starts the service and then creates new instance of chrome driver
-driver = webdriver.Chrome(executable_path="C:/Users/mayce/Downloads/chromedriver_win32/chromedriver.exe")
+driver = webdriver.Chrome(executable_path="PATH_HERE/chromedriver.exe")
 URL = "https://www.indeed.com/jobs?q=data+scientist&l=New+York"
 driver.get(URL)
 
@@ -48,3 +48,4 @@ def extract_job_from_result(driver):
     jobs.to_excel("indeed.xlsx", index=False, sheet_name='sheet1')
 
 extract_job_from_result(driver)
+
