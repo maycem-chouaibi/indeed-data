@@ -53,19 +53,21 @@ def extract_job_from_result(driver):
 
 # extract digits from salary range
 def str_to_numerical(stringValue):
-    replaceWith = '000'
-    if((stringValue.find(',') or stringValue.find('.')) and stringValue.find('K')):
-        replaceWith = '00'
-    return int('0'.join(re.findall(r'\d+', stringValue.replace('K', replaceWith))))
+    multiply = stringValue.find('K')
+    if(multiply <=0 ):
+        multiply = 1
+    else:
+        multiply = 1000
+    regex = re.findall(r"[-+]?(?:\d*\.*\d+)", stringValue)
+    res = float(''.join(regex)) * multiply
+    return res
 
 # format job salary range into number
 def format_salary(salary):
     temp = salary.split('-')
     yearlySalary = temp[1].find('a year') if len(temp) == 2 else temp[0].find('a year')
-    if(yearlySalary > 0): 
-        temp = str_to_numerical(temp[1]) - str_to_numerical(temp[0]) if len(temp) == 2 else str_to_numerical(temp[0])
-    else:
-        temp = str_to_numerical(temp[1]) - str_to_numerical(temp[0]) if len(temp) == 2 else str_to_numerical(temp[0])
+    temp = str_to_numerical(temp[1]) - str_to_numerical(temp[0]) if len(temp) == 2 else str_to_numerical(temp[0])
+    if(not yearlySalary > 0): 
         temp = temp * 2080
     return temp
 
